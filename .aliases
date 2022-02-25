@@ -1,0 +1,41 @@
+#!/bin/zsh
+
+# aliases
+alias ping="prettyping"
+alias cat="bat"
+alias rm="echo 'Be careful!'; false"
+alias f='cd $(find * -type d 2&>/dev/null | fzf)'
+alias vi="vim"
+alias vim=nvim-find
+alias mv='mv -i'
+alias cp='cp -i'
+alias ln='ln -i'
+alias python="python3"
+if [ "$(command -v exa)" ]; then
+    unalias -m 'll'
+    unalias -m 'l'
+    unalias -m 'la'
+    unalias -m 'ls'
+    alias ls='exa -G  --color auto --icons -a -s type'
+    alias ll='exa -l --color always --icons -a -s type'
+fi
+
+# Functions
+
+# fuzzy search for files
+nvim-find() {
+    if [[ $@ == "-f" ]]; then
+        command nvim $(fzf)
+    else
+        command nvim "$@"
+    fi
+}
+
+# always install with user flag
+pip3() {
+    if [[ $@ == "install" ]]; then
+        command pip3 install --user
+    else
+        command pip3 "$@"
+    fi
+}

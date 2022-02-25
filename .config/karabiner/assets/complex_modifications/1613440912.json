@@ -1,0 +1,113 @@
+{
+  "title": "Fine volume control (rev 2)",
+  "rules": [
+    {
+      "description": "Map volume controls to fine volume controls (Option + Shift + Volume) for Apple Keyboard",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "volume_decrement"
+          },
+          "to": [
+            {
+              "key_code": "volume_decrement",
+              "modifiers": [
+                "left_shift",
+                "left_option"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "volume_decrement",
+            "modifiers": {
+              "mandatory": [
+                "fn"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "volume_decrement",
+              "modifiers": [
+                "fn"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "volume_increment"
+          },
+          "to": [
+            {
+              "key_code": "volume_increment",
+              "modifiers": [
+                "left_shift",
+                "left_option"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "volume_increment",
+            "modifiers": {
+              "mandatory": [
+                "fn"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "volume_increment",
+              "modifiers": [
+                "fn"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Map fn + volume controls to fine volume controls (Option + Shift + Volume)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "volume_down"
+          },
+          "to": [
+            {
+              "key_code": "volume_decrement",
+              "modifiers": [
+                "left_shift",
+                "left_option"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "volume_up"
+          },
+          "to": [
+            {
+              "key_code": "volume_increment",
+              "modifiers": [
+                "left_shift",
+                "left_option"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

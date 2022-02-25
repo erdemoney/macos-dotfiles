@@ -1,0 +1,15 @@
+# special keys
+# https://github.com/koekeishiya/skhd/issues/1
+
+# open apps
+shift + alt - return : osascript ~/.bin/iterm.applescript
+shift + alt - q : osascript ~/.bin/quit.applescript    
+alt - b : open -a Safari
+alt - m : open -a Mail
+alt - c : open -a Vscodium
+
+# media control
+# https://gist.github.com/alexkli/7226378
+alt - sound_up : ~/.bin/mediakeys.py next
+alt - sound_down : ~/.bin/mediakeys.py playpause
+alt - mute : ~/.bin/mediakeys.py prev
