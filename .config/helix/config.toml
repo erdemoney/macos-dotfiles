@@ -1,0 +1,12 @@
+theme = "base16_transparent"
+
+[editor]
+bufferline = "multiple"
+
+[keys.normal]
+esc = ["collapse_selection", "keep_primary_selection"]
+
+"C-h" = "swap_view_left"
+"C-j" = "swap_view_down"
+"C-k" = "swap_view_up"
+"C-l" = "swap_view_right"
