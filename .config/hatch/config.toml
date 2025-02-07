@@ -1,0 +1,3 @@
+[publish.index.repos.tibit]
+url = "http://sqa-pip-1.tibitcom.net:8080"
+user = "tibit"
