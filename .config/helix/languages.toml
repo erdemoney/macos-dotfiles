@@ -3,6 +3,10 @@ name = "toml"
 formatter = { command = "taplo", args = ["fmt", "-"] }
 
 [[language]]
+name = "markdown"
+soft-wrap.enable = true
+
+[[language]]
 name = "yaml"
 language-servers = ["ansible-language-server", "yaml-language-server"]
 
@@ -20,5 +24,13 @@ language-servers = ["ruff", "pylsp"]
 formatter = { command = "ruff", args = ["format", "-" ] }
 auto-format = true
 
-[language-server.ruff.config.settings]
-lineLength = 120
+[language-server.pylsp.config.pylsp.plugins]
+flake8 = {enabled = false}
+autopep8 = {enabled = false}
+mccabe = {enabled = false}
+pycodestyle = {enabled = false}
+pyflakes = {enabled = false}
+pylint = {enabled = false}
+yapf = {enabled = false}
+mypy = { enabled = false }
+ruff = {enabled = false}
