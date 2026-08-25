@@ -1,0 +1,14 @@
+inherits = "base16_transparent"
+
+# base16_transparent sets inlay hints to { fg = "white", bg = "gray" }, where
+# "gray" is ANSI bright-black and reads as a harsh light grey on a black
+# background. Dim them: subtle dark grey block, muted foreground.
+"ui.virtual.inlay-hint" = { fg = "#7a7a7a", bg = "#1f1f1f" }
+"ui.virtual.inlay-hint.parameter" = { fg = "#6e6e6e", bg = "#1f1f1f" }
+"ui.virtual.inlay-hint.type" = { fg = "#7a7a7a", bg = "#1f1f1f" }
+
+# LSP document highlight (matching symbol under cursor) has no "ui.highlight"
+# in base16_transparent, so it falls back to "ui.selection" = { bg = "gray" } —
+# the same harsh light grey. Define it explicitly and keep it subtle.
+# Note: this does NOT affect visual selection, which still uses ui.selection.
+"ui.highlight" = { bg = "#2b2b2b" }

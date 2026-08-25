@@ -1,0 +1,137 @@
+# ============================================================================
+# Ghostty config — ported from ~/.config/wezterm/wezterm.lua
+#
+# Ghostty has native splits ("panes"), so we don't need zellij at all.
+# Ghostty 1.3.0+ has "key tables" — real modal key bindings, the direct
+# analog of WezTerm's ActivateKeyTable. We use them here:
+#
+#   ctrl+p  -> "pane mode"   (one-shot: activate_key_table_once, auto-exits
+#              after one action — matches wezterm one_shot=true)
+#   ctrl+n  -> "resize mode" (sticky: activate_key_table, stays active so you
+#              can hammer h/j/k/l — matches wezterm one_shot=false)
+#
+# Requires Ghostty >= 1.3.0. Table bindings use `<table>/<binding>` syntax.
+#
+# Session save/restore (the resurrect.wezterm plugin) has no Ghostty equivalent;
+# macOS window restoration + `window-save-state` is the closest thing.
+# ============================================================================
+
+# ---------------------------------------------------------------------------
+# Colorscheme (base16, matching the wezterm config)
+#   base00 #1a1a1a  base01 #222222  base02 #1d414d  base03 #767676
+#   base04 #b8b8b8  base05 #cccccc  base07 #f8f8f8  base08 #d88568
+#   base0A #b99353  base0B #83a471  base0C #7c9cae  base0D #8eccdd
+#   base0E #b98eb2
+# ---------------------------------------------------------------------------
+foreground = #cccccc
+background = #1a1a1a
+cursor-color = #cccccc
+cursor-text = #1a1a1a
+selection-foreground = #cccccc
+selection-background = #1d414d
+
+# split divider color
+split-divider-color = #1d414d
+
+# ansi 0-7
+palette = 0=#1a1a1a
+palette = 1=#d88568
+palette = 2=#83a471
+palette = 3=#b99353
+palette = 4=#8eccdd
+palette = 5=#b98eb2
+palette = 6=#7c9cae
+palette = 7=#cccccc
+# bright 8-15
+palette = 8=#767676
+palette = 9=#d88568
+palette = 10=#83a471
+palette = 11=#b99353
+palette = 12=#8eccdd
+palette = 13=#b98eb2
+palette = 14=#7c9cae
+palette = 15=#f8f8f8
+
+# ---------------------------------------------------------------------------
+# Window / general (matching wezterm settings)
+# ---------------------------------------------------------------------------
+# config.window_padding = 50 on all sides. Ghostty padding is per-axis.
+window-padding-x = 50
+window-padding-y = 50
+window-padding-balance = true
+
+# config.hide_tab_bar_if_only_one_tab = true
+window-show-tab-bar = auto
+
+# config.scrollback_lines = 10000000
+scrollback-limit = 10000000
+
+# Don't nag about updates
+auto-update = off
+
+# ============================================================================
+# Keybindings
+# ============================================================================
+
+# ---------------------------------------------------------------------------
+# PANE MODE  (wezterm: Ctrl+p one-shot "activate_pane" key table)
+#   Press ctrl+p, then ONE of the following (mode auto-exits after the action):
+#     h/j/k/l or arrows -> move focus between splits
+#     n                 -> split horizontally (new split to the right)
+#     d                 -> split vertically  (new split below)
+#     x                 -> close current split
+#     escape / enter    -> exit without doing anything
+#
+# NOTE on wezterm naming: your `n` = SplitHorizontal, `d` = SplitVertical.
+# In wezterm "SplitHorizontal" puts the new pane to the RIGHT (left|right),
+# and "SplitVertical" puts it BELOW (top/bottom). Ghostty's new_split uses
+# the resulting direction, so n->right and d->down preserves your muscle memory.
+# ---------------------------------------------------------------------------
+
+# enter pane mode (one-shot — matches wezterm one_shot=true)
+keybind = ctrl+p=activate_key_table_once:pane
+
+# move focus
+keybind = pane/h=goto_split:left
+keybind = pane/left=goto_split:left
+keybind = pane/l=goto_split:right
+keybind = pane/right=goto_split:right
+keybind = pane/k=goto_split:up
+keybind = pane/up=goto_split:up
+keybind = pane/j=goto_split:down
+keybind = pane/down=goto_split:down
+
+# split
+keybind = pane/n=new_split:right
+keybind = pane/d=new_split:down
+
+# close
+keybind = pane/x=close_surface
+
+# exit
+keybind = pane/escape=deactivate_key_table
+keybind = pane/enter=deactivate_key_table
+
+# ---------------------------------------------------------------------------
+# RESIZE MODE  (wezterm: Ctrl+n persistent "resize_pane" key table)
+#   Press ctrl+n ONCE to enter sticky resize mode, then hammer:
+#     h/j/k/l or arrows -> resize by 20px (repeatable, mode stays active)
+#     escape / enter    -> exit resize mode
+#   (wezterm used amount 1; bumped to 20px since Ghostty resizes in pixels)
+# ---------------------------------------------------------------------------
+
+# enter resize mode (sticky — matches wezterm one_shot=false)
+keybind = ctrl+n=activate_key_table:resize
+
+keybind = resize/h=resize_split:left,20
+keybind = resize/left=resize_split:left,20
+keybind = resize/l=resize_split:right,20
+keybind = resize/right=resize_split:right,20
+keybind = resize/k=resize_split:up,20
+keybind = resize/up=resize_split:up,20
+keybind = resize/j=resize_split:down,20
+keybind = resize/down=resize_split:down,20
+
+# exit
+keybind = resize/escape=deactivate_key_table
+keybind = resize/enter=deactivate_key_table

@@ -1,0 +1,51 @@
+extends: light
+
+footer:
+  style: template
+  left: "Ciena Corporation © 2026. All rights reserved. Confidential and Proprietary"
+  right: "{current_slide} / {total_slides}"
+
+slide_title:
+  colors:
+    foreground: "c41230"
+
+headings:
+  h1:
+    colors:
+      foreground: "c41230"
+  h2:
+    colors:
+      foreground: "c41230"
+
+inline_code:
+  colors:
+    foreground: "c41230"
+
+block_quote:
+  colors:
+    prefix: "c41230"
+
+alert:
+  styles:
+    important:
+      color: "c41230"
+    caution:
+      color: "c41230"
+
+modals:
+  selection_colors:
+    foreground: "c41230"
+
+intro_slide:
+  title:
+    colors:
+      foreground: "c41230"
+  event:
+    colors:
+      foreground: "c41230"
+  location:
+    colors:
+      foreground: "c41230"
+  date:
+    colors:
+      foreground: "c41230"

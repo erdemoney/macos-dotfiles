@@ -1,14 +1,34 @@
 [[language]]
 name = "toml"
+# taplo's LSP adds completion/hover/symbols; upstream Helix configures none.
 formatter = { command = "taplo", args = ["fmt", "-"] }
+language-servers = ["taplo"]
+auto-format = true
+
+[language-server.taplo]
+command = "taplo"
+args = ["lsp", "stdio"]
 
 [[language]]
 name = "markdown"
 soft-wrap.enable = true
+# diagnostics/code-action/completion/document-symbols MERGE across servers, so
+# rumdl is scoped to linting only; marksman owns navigation and completion.
+language-servers = [
+  "marksman",
+  { name = "rumdl", only-features = ["diagnostics", "code-action"] },
+]
+# rumdl is a linter/formatter (markdownlint rules), not a navigation server.
+# It never hard-wraps prose and preserves 2-space hard line breaks.
+# MD040 (bare code fences -> ```text) is disabled for the formatter but still
+# reported as a diagnostic, so fences aren't rewritten under you.
+formatter = { command = "rumdl", args = ["fmt", "-d", "MD040", "-"] }
+auto-format = true
 
 [[language]]
-name = "yaml"
-language-servers = ["ansible-language-server", "yaml-language-server"]
+name = "rst"
+soft-wrap.enable = true
+
 
 [language-server.yaml-language-server.config.yaml]
 format = { enable = true }
@@ -20,17 +40,99 @@ validation = true
 
 [[language]]
 name = "python"
-language-servers = ["ruff", "pylsp"]
-formatter = { command = "ruff", args = ["format", "-" ] }
+# ruff = lint + format, ty = types + navigation/completion/rename.
+language-servers = ["ruff", "ty"]
+auto-format = true
+# Runs before the formatter on save: organize imports, then apply all safe
+# fixes for the rules selected under [language-server.ruff.config.settings].
+code-actions-on-save = ["source.organizeImports", "source.fixAll"]
+formatter = { command = "ruff", args = ["format", "-"] }
+
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+
+[language-server.ruff.config.settings]
+# Diagnostics you SEE while editing.
+lint.select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+lint.preview = true
+# Fixes allowed to APPLY automatically on save. Everything else stays a
+# diagnostic you fix on demand with <space>a, so a half-finished edit is
+# never rewritten under you. Add rules here as you come to trust them.
+lint.fixable = ["I001", "RUF022"]
+
+[language-server.ty]
+command = "ty"
+args = ["server"]
+
+[language-server.ty.config]
+# NB: keys go at the top level here, NOT nested under a `ty` table — ty logs
+# "Received unknown options during initialization" if they are nested.
+# "workspace" checks the whole project, not just open files. Drop to
+# "openFilesOnly" if it feels heavy on a large repo.
+diagnosticMode = "workspace"
+
+[language-server.ty.config.inlayHints]
+variableTypes = true
+callArgumentNames = true
+
+[[language]]
+name = "bash"
+formatter = { command = "shfmt", args = ["-i", "2", "-ci", "-sr", "-"] }
 auto-format = true
 
-[language-server.pylsp.config.pylsp.plugins]
-flake8 = {enabled = false}
-autopep8 = {enabled = false}
-mccabe = {enabled = false}
-pycodestyle = {enabled = false}
-pyflakes = {enabled = false}
-pylint = {enabled = false}
-yapf = {enabled = false}
-mypy = { enabled = false }
-ruff = {enabled = false}
+[language-server.bash-language-server.config.bashIde]
+# shellcheck/shfmt are found on PATH; these just make the analysis explicit.
+shellcheckPath = "shellcheck"
+shfmt = { path = "shfmt", spaceRedirects = true, caseIndent = true }
+backgroundAnalysisMaxFiles = 500
+enableSourceErrorDiagnostics = true
+
+# zsh files map to the `bash` language upstream, but shellcheck rejects zsh
+# globbing/qualifiers and shfmt fails outright on `;;&`. Split them into their
+# own language: same grammar, bash-language-server for completion/hover, but
+# no shellcheck and no formatter.
+[[language]]
+name = "zsh"
+scope = "source.zsh"
+grammar = "bash"
+injection-regex = "zsh"
+comment-token = "#"
+indent = { tab-width = 2, unit = "  " }
+language-servers = ["bash-language-server-zsh"]
+file-types = [
+  "zsh",
+  "zshenv",
+  "zlogin",
+  "zlogout",
+  "zprofile",
+  "zshrc",
+  "zsh-theme",
+  "zshrc_Apple_Terminal",
+  { glob = ".zshenv" },
+  { glob = ".zlogin" },
+  { glob = ".zlogout" },
+  { glob = ".zprofile" },
+  { glob = ".zshrc" },
+  { glob = ".zimrc" },
+]
+
+[language-server.bash-language-server-zsh]
+command = "bash-language-server"
+args = ["start"]
+
+[language-server.bash-language-server-zsh.config.bashIde]
+shellcheckPath = ""   # empty disables shellcheck entirely
+
+# Typst. Upstream already maps typst -> tinymist, so this only adds settings.
+[language-server.tinymist.config]
+# tinymist ships its own formatter; no separate typstyle binary needed.
+formatterMode = "typstyle"
+# Don't silently emit PDFs next to sources. Set to "onSave" if you want them.
+exportPdf = "never"
+# Lint on save rather than on every keystroke.
+lint = { enabled = true, when = "onSave" }
+
+[[language]]
+name = "typst"
+auto-format = true
