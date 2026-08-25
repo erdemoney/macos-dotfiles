@@ -57,6 +57,8 @@ brew "libfido2"
 brew "libtiff"
 # Curses-based tool for viewing and analyzing log files
 brew "lnav"
+# Keep your Mac's application settings in sync
+brew "mackup"
 # Utility for directing compilation
 brew "make"
 # Language Server Protocol for Markdown
@@ -123,10 +125,6 @@ brew "yadm"
 brew "yaml-language-server"
 # Extensible command-line tool to format YAML files
 brew "yamlfmt"
-# Linter for YAML files
-brew "yamllint"
-# Blazing fast terminal file manager written in Rust, based on async I/O
-brew "yazi"
 # The AI coding agent built for the terminal.
 brew "anomalyco/tap/opencode", trusted: true
 # Control features of USB gaming headsets (sidetone, battery, and more)
