@@ -7,6 +7,8 @@ brew "zstd"
 brew "ansible"
 # Language Server for Ansible Files
 brew "ansible-language-server"
+# Checks ansible playbooks for practices and behaviour
+brew "ansible-lint"
 # Improved shell history for zsh, bash, fish and nushell
 brew "atuin", restart_service: :changed
 # Clone of cat(1) with syntax highlighting and Git integration
@@ -33,6 +35,8 @@ brew "gh"
 brew "git-delta"
 # Quickly rewrite git repository history
 brew "git-filter-repo"
+# Render markdown on the CLI
+brew "glow"
 # GNMI CLI client and collector
 brew "gnmic"
 # OpenType text shaping engine
@@ -119,12 +123,16 @@ brew "unar"
 brew "wget"
 # Lookup tool for domain names and other internet resources
 brew "whois"
+# Bring your favorite shell wherever you go through the ssh
+brew "xxh"
 # Yet Another Dotfiles Manager
 brew "yadm"
 # Language Server for Yaml Files
 brew "yaml-language-server"
 # Extensible command-line tool to format YAML files
 brew "yamlfmt"
+# Blazing fast terminal file manager written in Rust, based on async I/O
+brew "yazi"
 # The AI coding agent built for the terminal.
 brew "anomalyco/tap/opencode", trusted: true
 # Control features of USB gaming headsets (sidetone, battery, and more)
@@ -133,9 +141,8 @@ brew "sapd/headsetcontrol/headsetcontrol", args: ["HEAD"]
 cask "bitwarden"
 # Web browser
 cask "firefox"
-cask "font-symbols-only-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration
-cask "ghostty"
+cask "ghostty@tip"
 # Blocks all Keyboard and TouchBar input
 cask "keyboardcleantool"
 # Visual diff and merge tool

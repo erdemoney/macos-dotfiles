@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+_subcommands add "files"
+
+_subcommands describe "files" << 'HEREDOC'
+Usage:
+  nb files
+
+Description:
+  Open the current notebook in broot.
+HEREDOC
+
+_files() {
+  local notebook_name
+  local notebook_path
+
+  notebook_name="${NB_NOTEBOOK:-home}"
+  notebook_path="${NB_DIR:-$HOME/.nb}/${notebook_name}"
+
+  if ! command -v yazi > /dev/null 2>&1; then
+    printf "Error: yazi is not installed.\n" >&2
+    return 1
+  fi
+
+  yazi "$notebook_path"
+}
