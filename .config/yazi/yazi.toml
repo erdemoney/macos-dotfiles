@@ -1,0 +1,7 @@
+[opener]
+glow = [
+  { run = 'glow --tui %s', block = true, desc = 'Terminal markdown viewer' },
+]
+
+[open]
+prepend_rules = [{ url = "*.md", use = ["glow", "open", "edit"] }]
