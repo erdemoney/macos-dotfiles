@@ -61,14 +61,14 @@ brew "libfido2"
 brew "libtiff"
 # Curses-based tool for viewing and analyzing log files
 brew "lnav"
-# Keep your Mac's application settings in sync
-brew "mackup"
 # Utility for directing compilation
 brew "make"
 # Language Server Protocol for Markdown
 brew "marksman"
 # CLI for Mermaid library
 brew "mermaid-cli"
+# Mermaid.js, but headless, in Rust
+brew "merman-cli"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Command-line and local web note-taking, bookmarking, and archiving
