@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# glowm - glow with mermaid support
+# glow-mmd - glow with mermaid support
 #
 # Replaces ```mermaid fenced blocks with unicode diagrams rendered by
 # merman-cli, then pipes the result to glow.
@@ -8,15 +8,15 @@
 # Requires: glow (brew install glow), merman-cli
 #
 # Usage:
-#   glowm README.md
-#   glowm -p README.md        # pager mode
-#   cat README.md | glowm     # stdin
+#   glow-mmd README.md
+#   glow-mmd -p README.md        # pager mode
+#   cat README.md | glow-mmd     # stdin
 #
 set -euo pipefail
 
 for dep in glow merman-cli; do
   command -v "$dep" > /dev/null || {
-    echo "glowm: missing dependency: $dep" >&2
+    echo "glow-mmd: missing dependency: $dep" >&2
     exit 1
   }
 done
