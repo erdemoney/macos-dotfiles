@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+#
+# glowm - glow with mermaid support
+#
+# Replaces ```mermaid fenced blocks with unicode diagrams rendered by
+# merman-cli, then pipes the result to glow.
+#
+# Requires: glow (brew install glow), merman-cli
+#
+# Usage:
+#   glowm README.md
+#   glowm -p README.md        # pager mode
+#   cat README.md | glowm     # stdin
+#
+set -euo pipefail
+
+for dep in glow merman-cli; do
+    command -v "$dep" >/dev/null || { echo "glowm: missing dependency: $dep" >&2; exit 1; }
+done
+
+# Stream stdin -> stdout, rendering mermaid blocks inline.
+render_mermaid() {
+    local line block="" in_block=0
+    while IFS= read -r line || [[ -n $line ]]; do
+        if (( in_block )); then
+            if [[ $line =~ ^[[:space:]]*\`\`\`[[:space:]]*$ ]]; then
+                in_block=0
+                printf '```\n'
+                printf '%s' "$block" | merman-cli render --format unicode - 2>/dev/null \
+                    || printf '%s' "$block"
+                printf '```\n'
+                block=""
+            else
+                block+="$line"$'\n'
+            fi
+        elif [[ $line =~ ^[[:space:]]*\`\`\`mermaid[[:space:]]*$ ]]; then
+            in_block=1
+        else
+            printf '%s\n' "$line"
+        fi
+    done
+}
+
+args=()
+file=""
+for arg in "$@"; do
+    case "$arg" in
+        -|-*) [[ $arg == - ]] || args+=("$arg") ;;
+        *)    file="$arg" ;;
+    esac
+done
+
+if [[ -n $file ]]; then
+    [[ -f $file ]] || { echo "glowm: file not found: $file" >&2; exit 1; }
+    exec < "$file"
+fi
+
+render_mermaid | glow "${args[@]}" -
