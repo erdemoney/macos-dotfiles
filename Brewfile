@@ -5,12 +5,10 @@ tap "sapd/headsetcontrol", trusted: true
 brew "zstd"
 # Automate deployment, configuration, and upgrading
 brew "ansible"
-# Language Server for Ansible Files
-brew "ansible-language-server"
-# Checks ansible playbooks for practices and behaviour
-brew "ansible-lint"
 # Improved shell history for zsh, bash, fish and nushell
 brew "atuin", restart_service: :changed
+# Language Server for Bash
+brew "bash-language-server"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # X.Org: Core X11 protocol client library
@@ -33,8 +31,8 @@ brew "fisher"
 brew "gh"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
-# Quickly rewrite git repository history
-brew "git-filter-repo"
+# High-level command-line interface for Git
+brew "git-town"
 # Render markdown on the CLI
 brew "glow"
 # GNMI CLI client and collector
@@ -119,6 +117,8 @@ brew "ty"
 brew "typst"
 # Command-line unarchiving tools supporting multiple formats
 brew "unar"
+# Language servers for HTML, CSS, JavaScript, and JSON extracted from vscode
+brew "vscode-langservers-extracted"
 # Internet file retriever
 brew "wget"
 # Lookup tool for domain names and other internet resources
@@ -129,8 +129,6 @@ brew "xxh"
 brew "yadm"
 # Language Server for Yaml Files
 brew "yaml-language-server"
-# Extensible command-line tool to format YAML files
-brew "yamlfmt"
 # Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi"
 # The AI coding agent built for the terminal.
@@ -159,15 +157,10 @@ cask "royal-tsx"
 cask "swish"
 # Unpacks archive files
 cask "the-unarchiver"
-cargo "bashls"
 cargo "cargo-steel-lib", source: "https://github.com/mattwparas/steel.git"
 cargo "helix-term"
 cargo "steel-forge", source: "https://github.com/mattwparas/steel.git"
 cargo "steel-interpreter", source: "https://github.com/mattwparas/steel.git"
 cargo "steel-language-server", source: "https://github.com/mattwparas/steel.git"
-uv "-"
 uv "docformatter"
 uv "ipdb"
-uv "legit"
-uv "virtualfish"
-npm "@ansible/ansible-language-server"
