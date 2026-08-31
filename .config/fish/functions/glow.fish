@@ -1,3 +1,3 @@
-function glow --wraps=glowm --description 'alias glow glowm'
-    glowm $argv
+function glow --wraps=glow-mmd --description 'alias glow glow-mmd'
+    glow-mmd $argv
 end
