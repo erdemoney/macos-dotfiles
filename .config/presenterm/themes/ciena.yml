@@ -1,0 +1,162 @@
+default:
+  margin:
+    percent: 8
+  colors:
+    foreground: "212529" # dark charcoal
+    background: "ffffff" # white
+
+column_layout:
+  margin:
+    fixed: 4
+
+slide_title:
+  alignment: center
+  padding_bottom: 1
+  padding_top: 1
+  colors:
+    foreground: "c41230" # Ciena red
+  bold: true
+  font_size: 2
+
+code:
+  alignment: center
+  minimum_size: 50
+  minimum_margin:
+    percent: 8
+  theme_name: GitHub
+  padding:
+    horizontal: 2
+    vertical: 1
+
+execution_output:
+  colors:
+    foreground: "212529"
+    background: "f1f3f5"
+  status:
+    running:
+      foreground: "6c757d"
+    success:
+      foreground: "2f9e44"
+    failure:
+      foreground: "c41230" # Ciena red for failure
+    not_started:
+      foreground: "adb5bd"
+  padding:
+    horizontal: 2
+    vertical: 1
+
+pty_output:
+  colors:
+    foreground: "212529"
+    background: "f1f3f5"
+  cursor:
+    highlight_colors:
+      foreground: "f1f3f5"
+      background: "212529"
+
+inline_code:
+  colors:
+    foreground: "c41230"
+    background: "fdecee" # very light red tint
+
+intro_slide:
+  title:
+    alignment: center
+    colors:
+      foreground: "c41230"
+    font_size: 2
+  subtitle:
+    alignment: center
+    colors:
+      foreground: "6c757d"
+  event:
+    alignment: center
+    colors:
+      foreground: "c41230"
+  location:
+    alignment: center
+    colors:
+      foreground: "c41230"
+  date:
+    alignment: center
+    colors:
+      foreground: "c41230"
+  author:
+    alignment: center
+    colors:
+      foreground: "495057"
+    positioning: page_bottom
+  footer: false
+
+headings:
+  h1:
+    prefix: "██"
+    colors:
+      foreground: "c41230"
+  h2:
+    prefix: "▓▓▓"
+    colors:
+      foreground: "a70f28"
+  h3:
+    prefix: "▒▒▒▒"
+    colors:
+      foreground: "495057"
+  h4:
+    prefix: "░░░░░"
+    colors:
+      foreground: "495057"
+  h5:
+    prefix: "░░░░░░"
+    colors:
+      foreground: "495057"
+  h6:
+    prefix: "░░░░░░░"
+    colors:
+      foreground: "495057"
+
+block_quote:
+  prefix: "▍ "
+  colors:
+    foreground: "212529"
+    background: "f1f3f5"
+    prefix: "c41230"
+
+alert:
+  prefix: "▍ "
+  base_colors:
+    foreground: "212529"
+    background: "f1f3f5"
+  styles:
+    note:
+      color: "868e96"
+    tip:
+      color: "2f9e44"
+    important:
+      color: "c41230"
+    warning:
+      color: "e67700"
+    caution:
+      color: "c41230"
+
+typst:
+  colors:
+    foreground: "212529"
+    background: "f1f3f5"
+
+footer:
+  style: template
+  right: "{current_slide} / {total_slides}"
+
+modals:
+  selection_colors:
+    foreground: "c41230"
+
+mermaid:
+  background: transparent
+  theme: default
+
+d2:
+  theme: 4
+
+layout_grid:
+  color: "dee2e6"
